@@ -11,9 +11,10 @@ using System;
 namespace MyStore.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180905192053_AddingModels")]
+    partial class AddingModels
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -221,7 +222,7 @@ namespace MyStore.Data.Migrations
 
                     b.HasIndex("GroceryProductsID");
 
-                    b.ToTable("GroceryCart");
+                    b.ToTable("GroceryProductCart");
                 });
 
             modelBuilder.Entity("MyStore.Models.GroceryCartProducts", b =>
@@ -233,13 +234,9 @@ namespace MyStore.Data.Migrations
 
                     b.Property<DateTime?>("DateLastModified");
 
-                    b.Property<int?>("GroceryCartID");
+                    b.Property<int>("GroceryCartID");
 
-                    b.Property<int>("GroceryCartProductsID");
-
-                    b.Property<int>("GroceryProductID");
-
-                    b.Property<int?>("GroceryProductsID");
+                    b.Property<int>("GroceryProductsID");
 
                     b.Property<string>("Name");
 
@@ -342,11 +339,13 @@ namespace MyStore.Data.Migrations
                 {
                     b.HasOne("MyStore.Models.GroceryCart", "GroceryCart")
                         .WithMany("GroceryCartProducts")
-                        .HasForeignKey("GroceryCartID");
+                        .HasForeignKey("GroceryCartID")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("MyStore.Models.GroceryProducts", "GroceryProducts")
                         .WithMany("GroceryCartProducts")
-                        .HasForeignKey("GroceryProductsID");
+                        .HasForeignKey("GroceryProductsID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("MyStore.Models.GroceryProducts", b =>

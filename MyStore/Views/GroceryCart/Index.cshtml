@@ -1,0 +1,51 @@
+﻿@model GroceryCart
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="w3-padding-large" style="margin: 2vw">
+    <h2 class="w3-center">CART</h2>
+    @if (Model.GroceryCartProducts.Count == 0)
+    {
+        <p class="w3-center">You have nothing scheduled,<a asp-controller="GroceryProduct" asp-action="Index"> check out some animals or host an event!</a></p>
+    }
+
+    else
+    {
+        @if (Model.GroceryCartProducts.Count != 0)
+        {
+            <h3>VISITS</h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Puppy</th>
+                        <th>Date/Time</th>
+                        <th>Visit Length</th>
+                        <th>Recurrence</th>
+                        <th>Number of Puppies</th>
+                        <th>Price</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var product in Model.GroceryCartProducts)
+                    {
+                        <tr>
+                            <td>@product.GroceryProducts.Name</td>
+                            <td>@product.GroceryProducts.Price</td>
+                            <td>@product.Quantity</td>
+                            <td style="border: none">
+                                <form asp-action="remove" method="post">
+                                    <input type="hidden" name="id" value="@product.GroceryCartProductsID" />
+                                    <button class="w3-bar-item w3-button" style="border: solid;">Remove</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        }
+    }
+</div>

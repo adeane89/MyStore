@@ -1,0 +1,86 @@
+﻿@model IEnumerable<GroceryProducts>
+@{
+    ViewData["Title"] = "Index";
+}
+<form>
+    <div>
+        <select name="category">
+            @if (string.IsNullOrEmpty(ViewBag.selectedCategory))
+            {
+                <option value="" selected>All Products</option>
+            }
+            else
+            {
+                <option value="">All Products</option>
+            }
+            @foreach (string category in (string[])ViewData["Categories"])
+            {
+                @if (ViewBag.selectedCategory == category)
+                {
+                    <option value="@category" selected>@category</option>
+                }
+                else
+                {
+                    <option value="@category">@category</option>
+                }
+
+            }
+        </select>
+
+        <select name="sort">
+            <option value="price">Price (High to Low)</option>
+            <option value="name">Name</option>
+        </select>
+
+        <p><button class="w3-btn">Sort & Filter</button></p>
+    </div>
+
+</form>
+
+
+<div class="w3-row">
+    @foreach (var product in Model)
+    {
+        <div class="w3-col l3 s6">
+            <div class="w3-container">
+                <a onclick="document.getElementById('id01').style.display='block'"><img src="@product.ImagePath" alt="@product.Name" style="width:100%"></a>
+                <h5>@product.Name</h5>
+                <p>@product.Description</p>
+                <p>@product.Price</p>
+                <div class="w3-container">
+                    <a asp-controller="GroceryCart" asp-action="Index" asp-route-id="@product.ID" class="w3-button w3-black">Add to Cart</a>
+
+                    <div id="id01" class="w3-modal">
+                        <div class="w3-modal-content">
+                            <div class="w3-container">
+                                <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+                                <form method="post">
+                                    <input type="hidden" name="id" value="@product.ID" />
+                                    <div class="form-group">
+                                        <p>@product.Name</p>
+                                        <p>@product.Price /ea</p>
+                                        <img src="@product.ImagePath" alt="@product.Name">
+                                        <select name="quantity" style="padding-top: 6px; padding-bottom: 10px;">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                            <option value="10">10</option>
+                                        </select>
+                                        <a asp-controller="GroceryCart" asp-action="Index" asp-route-id="@product.ID" class="w3-button w3-black">Add to Cart</a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    }
+</div>
