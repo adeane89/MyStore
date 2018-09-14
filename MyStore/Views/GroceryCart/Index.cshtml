@@ -13,39 +13,35 @@
 
     else
     {
-        @if (Model.GroceryCartProducts.Count != 0)
-        {
             <h3>VISITS</h3>
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Puppy</th>
-                        <th>Date/Time</th>
-                        <th>Visit Length</th>
-                        <th>Recurrence</th>
-                        <th>Number of Puppies</th>
+                        <th>Name</th>
                         <th>Price</th>
+                        <th>ID</th>
+                        <th>Quantity</th>
 
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var product in Model.GroceryCartProducts)
                     {
-                        <tr>
-                            <td>@product.GroceryProducts.Name</td>
-                            <td>@product.GroceryProducts.Price</td>
-                            <td>@product.Quantity</td>
-                            <td style="border: none">
-                                <form asp-action="remove" method="post">
-                                    <input type="hidden" name="id" value="@product.GroceryCartProductsID" />
-                                    <button class="w3-bar-item w3-button" style="border: solid;">Remove</button>
-                                </form>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td>@product.GroceryProduct.Name</td>
+                        <td>@product.GroceryProduct.Price</td>
+                        <td>@product.GroceryProduct.ID</td>
+                        <td>@product.Quantity</td>
+                        <td style="border: none">
+                            <form asp-action="remove" method="post">
+                                <input type="hidden" name="id" value="@product.ID" />
+                                <button class="w3-bar-item w3-button" style="border: solid;">Remove</button>
+                            </form>
+                        </td>
+                    </tr>
                     }
 
                 </tbody>
             </table>
-        }
     }
 </div>

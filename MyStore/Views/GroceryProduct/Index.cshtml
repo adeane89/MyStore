@@ -43,14 +43,15 @@
     {
         <div class="w3-col l3 s6">
             <div class="w3-container">
-                <a onclick="document.getElementById('id01').style.display='block'"><img src="@product.ImagePath" alt="@product.Name" style="width:100%"></a>
+                @*<a onclick="document.getElementById('id01').style.display='block'"><img src="@product.ImagePath" alt="@product.Name" style="width:100%"></a>*@
+                <img src="@product.ImagePath" alt="@product.Name" style="width: 75%;">
                 <h5>@product.Name</h5>
                 <p>@product.Description</p>
                 <p>@product.Price</p>
                 <div class="w3-container">
-                    <a asp-controller="GroceryCart" asp-action="Index" asp-route-id="@product.ID" class="w3-button w3-black">Add to Cart</a>
-
-                    <div id="id01" class="w3-modal">
+                    @*<a asp-controller="GroceryCart" asp-action="Index" asp-route-id="@product.ID" class="w3-button w3-black">Add to Cart</a>*@
+                    <a asp-controller="GroceryProduct" asp-action="Details" asp-route-id="@product.ID" class="btn btn-secondary">View Details</a>
+                    @*<div id="id01" class="w3-modal">
                         <div class="w3-modal-content">
                             <div class="w3-container">
                                 <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
@@ -73,12 +74,12 @@
                                             <option value="10">10</option>
                                         </select>
                                         <a asp-controller="GroceryCart" asp-action="Index" asp-route-id="@product.ID" class="w3-button w3-black">Add to Cart</a>
+                                        <a asp-controller="GroceryProduct" asp-action="Details" asp-route-id="@product.ID" class="btn btn-secondary">View Details</a>
                                     </div>
                                 </form>
                             </div>
                         </div>
-                    </div>
-
+                    </div>*@
                 </div>
             </div>
         </div>

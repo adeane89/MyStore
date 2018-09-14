@@ -11,9 +11,10 @@ using System;
 namespace MyStore.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180914171458_CategoryFix")]
+    partial class CategoryFix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -211,15 +212,11 @@ namespace MyStore.Data.Migrations
 
                     b.Property<DateTime?>("DateLastModified");
 
-                    b.Property<int?>("GroceryProductsID");
-
                     b.HasKey("ID");
 
                     b.HasIndex("ApplicationUserID")
                         .IsUnique()
                         .HasFilter("[ApplicationUserID] IS NOT NULL");
-
-                    b.HasIndex("GroceryProductsID");
 
                     b.ToTable("GroceryCart");
                 });
@@ -332,10 +329,6 @@ namespace MyStore.Data.Migrations
                     b.HasOne("MyStore.Models.ApplicationUser", "ApplicationUser")
                         .WithOne("GroceryCart")
                         .HasForeignKey("MyStore.Models.GroceryCart", "ApplicationUserID");
-
-                    b.HasOne("MyStore.Models.GroceryProducts", "GroceryProducts")
-                        .WithMany()
-                        .HasForeignKey("GroceryProductsID");
                 });
 
             modelBuilder.Entity("MyStore.Models.GroceryCartProducts", b =>

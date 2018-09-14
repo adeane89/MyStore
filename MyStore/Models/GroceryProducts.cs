@@ -16,7 +16,7 @@ namespace MyStore.Models
         public decimal Price { get; set; }
         public string Description { get; set; }
         public string ImagePath { get; set; }
-        public string GroceryCategoryName { get; set; }
+        public string CategoryName { get; set; }
         public Category Category { get; set; }
         public DateTime? DateCreated { get; set; }
         public DateTime? DateLastModified { get; set; }

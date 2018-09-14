@@ -11,9 +11,10 @@ using System;
 namespace MyStore.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180914164722_UpdatingGCP")]
+    partial class UpdatingGCP
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -211,15 +212,11 @@ namespace MyStore.Data.Migrations
 
                     b.Property<DateTime?>("DateLastModified");
 
-                    b.Property<int?>("GroceryProductsID");
-
                     b.HasKey("ID");
 
                     b.HasIndex("ApplicationUserID")
                         .IsUnique()
                         .HasFilter("[ApplicationUserID] IS NOT NULL");
-
-                    b.HasIndex("GroceryProductsID");
 
                     b.ToTable("GroceryCart");
                 });
@@ -261,13 +258,13 @@ namespace MyStore.Data.Migrations
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("CategoryName");
-
                     b.Property<DateTime?>("DateCreated");
 
                     b.Property<DateTime?>("DateLastModified");
 
                     b.Property<string>("Description");
+
+                    b.Property<string>("GroceryCategoryName");
 
                     b.Property<string>("ImagePath");
 
@@ -277,7 +274,7 @@ namespace MyStore.Data.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("CategoryName");
+                    b.HasIndex("Name");
 
                     b.ToTable("GroceryProduct");
                 });
@@ -332,10 +329,6 @@ namespace MyStore.Data.Migrations
                     b.HasOne("MyStore.Models.ApplicationUser", "ApplicationUser")
                         .WithOne("GroceryCart")
                         .HasForeignKey("MyStore.Models.GroceryCart", "ApplicationUserID");
-
-                    b.HasOne("MyStore.Models.GroceryProducts", "GroceryProducts")
-                        .WithMany()
-                        .HasForeignKey("GroceryProductsID");
                 });
 
             modelBuilder.Entity("MyStore.Models.GroceryCartProducts", b =>
@@ -354,7 +347,7 @@ namespace MyStore.Data.Migrations
                 {
                     b.HasOne("MyStore.Models.Category", "Category")
                         .WithMany("GroceryProduct")
-                        .HasForeignKey("CategoryName");
+                        .HasForeignKey("Name");
                 });
 #pragma warning restore 612, 618
         }
