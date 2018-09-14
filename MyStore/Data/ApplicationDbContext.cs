@@ -15,7 +15,8 @@ namespace MyStore.Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<GroceryCart> GroceryCart { get; set; }
         public DbSet<GroceryCartProducts> GroceryCartProducts { get; set; }
-
+        public DbSet<GroceryOrder> GroceryOrders { get; set; }
+        public DbSet<GroceryOrderProduct> GroceryOrderProducts { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)

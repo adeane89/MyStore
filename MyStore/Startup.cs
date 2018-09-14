@@ -36,6 +36,15 @@ namespace MyStore
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
 
+            services.AddTransient<IEmailSender>((IServiceProvider) => new EmailSender(Configuration.GetValue<string>("SendGrid.ApiKey")));
+
+            services.AddTransient<Braintree.IBraintreeGateway>((IServiceProvider) => new Braintree.BraintreeGateway(
+                   Configuration.GetValue<string>("Braintree.Environment"),
+                   Configuration.GetValue<string>("Braintree.MerchantId"),
+                   Configuration.GetValue<string>("Braintree.PublicKey"),
+                   Configuration.GetValue<string>("Braintree.PrivateKey")
+                   ));
+
             services.AddMvc();
         }
 

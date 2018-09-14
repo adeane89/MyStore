@@ -13,20 +13,20 @@
 
     else
     {
-            <h3>VISITS</h3>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Price</th>
-                        <th>ID</th>
-                        <th>Quantity</th>
+        <h3>VISITS</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>ID</th>
+                    <th>Quantity</th>
 
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var product in Model.GroceryCartProducts)
-                    {
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var product in Model.GroceryCartProducts)
+                {
                     <tr>
                         <td>@product.GroceryProduct.Name</td>
                         <td>@product.GroceryProduct.Price</td>
@@ -39,9 +39,10 @@
                             </form>
                         </td>
                     </tr>
-                    }
+                }
 
-                </tbody>
-            </table>
+            </tbody>
+        </table>
     }
+    <a asp-controller="Checkout" asp-action="Index" class="btn btn-primary">Checkout</a>
 </div>
